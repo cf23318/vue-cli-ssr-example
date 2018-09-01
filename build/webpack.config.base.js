@@ -4,6 +4,7 @@ const createVueLoaderOptions = require('./vue-loader.config')
 const isDev = process.env.NODE_ENV === 'development'
 
 const config = {
+  mode: process.env.NODE_ENV || 'production', // development || production
   target: 'web',
   entry: path.join(__dirname, '../client/index.js'),
   output: {
@@ -17,7 +18,7 @@ const config = {
         test: /\.(vue|js|jsx)$/,
         loader: 'eslint-loader',
         exclude: /node_modules/,
-        enforce: 'pre', // 先一步预处理 pro先一步 post后一步
+        enforce: 'pre' // 先一步预处理 pro先一步 post后一步
       },
       {
         test: /\.vue$/,
@@ -31,7 +32,7 @@ const config = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         test: /\.(gif|jpg|jpeg|png|svg)$/,
@@ -46,7 +47,7 @@ const config = {
         ]
       }
     ]
-  },
+  }
 }
 
 module.exports = config

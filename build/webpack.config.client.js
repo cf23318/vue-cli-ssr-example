@@ -7,7 +7,7 @@ const baseConfig = require('./webpack.config.base')
 
 const isDev = process.env.NODE_ENV === 'development'
 
-let config;
+let config
 
 const defaultPluins = [
   new webpack.DefinePlugin({
@@ -21,7 +21,7 @@ const devServer = {
   port: 8000,
   host: 'localhost',
   overlay: {
-    errors: true,
+    errors: true
   },
   hot: true
 }
@@ -36,7 +36,7 @@ if (isDev) {
           use: [
             'vue-style-loader',
             {
-              loader: 'css-loader',
+              loader: 'css-loader'
               // options: {
               //   module: true,
               //   // 定义css module时的名字
@@ -46,25 +46,23 @@ if (isDev) {
             {
               loader: 'postcss-loader',
               options: {
-                sourceMap: true,
+                sourceMap: true
               }
             },
             'stylus-loader'
           ]
         }
-      ],
+      ]
     },
     devServer,
     plugins: defaultPluins.concat(defaultPluins, [
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoEmitOnErrorsPlugin()
+      new webpack.HotModuleReplacementPlugin()
     ])
   })
 } else {
   config = merge(baseConfig, {
     entry: {
-      app: path.join(__dirname, '../client/index.js'),
-      vendor: ['vue']
+      app: path.join(__dirname, '../client/index.js')
     },
     output: {
       filename: '[name].[chunkhash:8].js'
@@ -80,23 +78,23 @@ if (isDev) {
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: true,
+                  sourceMap: true
                 }
               },
               'stylus-loader'
             ]
           })
-        },
+        }
       ]
     },
+    optimization: {
+      splitChunks: {
+        chunks: 'all'
+      },
+      runtimeChunk: true
+    },
     plugins: defaultPluins.concat(defaultPluins, [
-      new ExtractPlugin('styles.[contentHash:8].css'),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor'
-      }),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'runtime'
-      })
+      new ExtractPlugin('styles.[hash:8].css')
     ])
   })
 }
