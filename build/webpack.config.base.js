@@ -8,7 +8,8 @@ const config = {
   entry: path.join(__dirname, '../client/index.js'),
   output: {
     filename: 'bundle.[hash:8].js',
-    path: path.join(__dirname, '../dist')
+    path: path.join(__dirname, '../dist'),
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -17,7 +18,7 @@ const config = {
         test: /\.(vue|js|jsx)$/,
         loader: 'eslint-loader',
         exclude: /node_modules/,
-        enforce: 'pre', // 先一步预处理 pro先一步 post后一步
+        enforce: 'pre' // 先一步预处理 pro先一步 post后一步
       },
       {
         test: /\.vue$/,
@@ -31,7 +32,7 @@ const config = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         test: /\.(gif|jpg|jpeg|png|svg)$/,
@@ -46,7 +47,7 @@ const config = {
         ]
       }
     ]
-  },
+  }
 }
 
 module.exports = config

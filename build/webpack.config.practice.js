@@ -13,19 +13,16 @@ const defaultPluins = [
   })
 ]
 const devServer = {
-  port: 8000,
+  port: 8001,
   host: 'localhost',
   overlay: {
     errors: true
-  },
-  historyApiFallback: {
-    index: '/index.html'
   },
   hot: true
 }
 
 let config = merge(baseConfig, {
-  entry: path.join(__dirname, '../client/index.js'),
+  entry: path.join(__dirname, '../practice/index.js'),
   devtool: '#cheap-module-eval-source-map',
   module: {
     rules: [
